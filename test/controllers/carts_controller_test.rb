@@ -34,7 +34,7 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update cart" do
-    patch cart_url(@cart), params: { cart: {  } }
+    patch cart_url(@cart), params: { cart: {  } } 
     assert_redirected_to cart_url(@cart)
   end
 
