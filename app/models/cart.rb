@@ -14,7 +14,6 @@ class Cart < ApplicationRecord
 
 	def reduce_product(product)
 		current_item = line_items.find_by(product_id: product.id)
-		puts line_items
 		if current_item.quantity > 0
 			current_item.quantity -= 1
 			if current_item.quantity == 0
