@@ -1,0 +1,10 @@
+    <!-- ten partial la _line_item nen ten variable cung la line_item -->
+    <!-- render collection, vao partial thi tu dong iterate -->
+    <tr>
+      <td><%= line_item.quantity %>&times;</td>
+      <td><%= line_item.product.title %></td>
+      <td class="item_price"><%= number_to_currency(line_item.total_price) %></td>
+      <td><%= button_to 'delete', line_item, method: :delete %></td>
+      <td><%= line_item.product_id %></td>
+      <td><%= button_to 'reduce', reduce_amount_line_items_path(product_id: line_item.product_id, cart_id: line_item.cart_id), method: :patch %></td>
+    </tr>
