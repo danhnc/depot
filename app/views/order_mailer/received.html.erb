@@ -1,5 +1,12 @@
-<h1>Order#received</h1>
-
-<p>
-  <%= @greeting %>, find me in app/views/order_mailer/received.html.erb
-</p>
+<h1>Dear <%= @order.name %></h1>
+<p>Thank you for your recent order from The Pragmatic Store.</p>
+<p>You ordered the following items:</p>
+<table>
+<tr><th colspan="2">Qty</th><th>Title</th></tr>
+<% @order.line_items.each do |item| %>
+<tr>
+<td colspan="2"><%= item.quantity %></td>
+<td><%= item.product.title %></td>
+</tr>
+<% end %>
+</table>
