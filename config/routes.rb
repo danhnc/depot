@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get 'admin' => 'admin#index'
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  resources :users
   resources :orders
   root 'store#index', as: 'store_index'
   patch 'line_items/reduce_amount', to:'line_items#reduce_amount', as: 'reduce_amount_line_items'

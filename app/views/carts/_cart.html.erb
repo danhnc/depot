@@ -16,5 +16,7 @@
 	<%= button_to 'Checkout', nil, disabled: true %>
 <% end %>
 <%= button_to 'Empty cart', cart, method: :delete, data: { confirm: 'Are you sure?' } %>
-
+<% if session[:user_id] %>
+	<%= session[:user_id] %>
+<% end %>
 <% end %>

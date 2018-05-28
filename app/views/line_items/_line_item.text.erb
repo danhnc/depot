@@ -1,1 +1,3 @@
 <%= sprintf("%2d x %s", line_item.quantity, truncate(line_item.product.title, length: 50)) %>
+<!-- %2d means minimum width of two spaces, which, by default, will be right-justified
+%s is a simple string -->
