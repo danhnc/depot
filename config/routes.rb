@@ -8,11 +8,14 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :orders
-  root 'store#index', as: 'store_index'
   patch 'line_items/reduce_amount', to:'line_items#reduce_amount', as: 'reduce_amount_line_items'
   resources :products
-  resources :line_items
-  resources :carts
+
+  scope '(:locale)' do
+    resources :orders
+    resources :line_items
+    resources :carts
+    root 'store#index', as: 'store_index', via: :all
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
