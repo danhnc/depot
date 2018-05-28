@@ -16,3 +16,4 @@
 //= require_tree .
 //= require jquery
 //= require jquery-ui/effects/effect-blind
+//= require bootstrap-datepicker

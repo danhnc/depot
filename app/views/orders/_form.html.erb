@@ -29,12 +29,38 @@
 
   <div class="field">
     <%= form.label :pay_type %>
-    <%= form.select :pay_type, Order.pay_types.keys, id: :order_pay_type,
-                  prompt: t('.pay_prompt_html') %>
+    <%= form.select :pay_type, Order.pay_types.keys, id: :order_pay_type, prompt: t('.pay_prompt_html') %>
+  </div>
 
+  <div class="field">
+    <%= form.label :ship %>
+    <%= form.check_box :ship %>
+  </div>
+
+  <div class="field" id="ship_date" style="display:none;">
+    <%= form.label :ship_date %>
+    <%= form.text_field :ship_date, id: :datepicker, size: 40 %>
   </div>
 
   <div class="actions">
     <%= form.submit t('.submit') %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  var checkbox = document.getElementById('order_ship');
+  var ship_date_div = document.getElementById('ship_date');
+  checkbox.onchange = function() {
+     if(this.checked) {
+       ship_date_div.style['display'] = 'block';
+     } else {
+       ship_date_div.style['display'] = 'none';
+     }
+  };
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#datepicker').datepicker();
+  });
+</script>
