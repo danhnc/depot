@@ -4,6 +4,8 @@ class OrdersController < ApplicationController
   before_action :set_cart, only: [:new, :create]
   before_action :ensure_cart_isnt_empty, only: :new
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :ship_date_greater_than_today, only: [:create, :update]
+
 
   # GET /orders
   # GET /orders.json
@@ -31,11 +33,13 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.add_line_items_from_cart(@cart)
 
+    # @order.ship_date_if_ship_checked(params.require(:order)[:ship])
+
     respond_to do |format|
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-        OrderMailer.received(@order).deliver_later
+        # OrderMailer.received(@order).deliver_later
         format.html { redirect_to store_index_url, notice: I18n.t('.thanks') }
         format.json { render :show, status: :created, location: @order }
       else
@@ -83,6 +87,16 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:name, :address, :email, :pay_type)
+      params.require(:order).permit(:name, :address, :email, :pay_type, :ship_date)
     end
+
+    def ship_date_greater_than_today
+      unless order_params[:ship_date].empty?
+        ship_date = DateTime.strptime(order_params[:ship_date], '%m/%d/%Y')
+        unless ship_date > Date.today
+          redirect_to new_order_path, notice: 'ship date has to has to be greater than today'
+        end
+      end
+    end
+
 end
