@@ -54,6 +54,15 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
+        
+      puts "======================================"
+      puts @order.audits.count
+      audit = @order.audits.last
+      puts audit.action
+      puts audit.audited_changes
+
+
+      
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else

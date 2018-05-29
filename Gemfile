@@ -69,5 +69,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 
+#extra gem
 
+#datetimepicker in orders
 gem 'bootstrap-datepicker-rails'
+
+#tracking any changes in model
+gem 'audited', '~> 4.7'

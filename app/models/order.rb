@@ -11,6 +11,8 @@ class Order < ApplicationRecord
   validates :pay_type, inclusion: pay_types.keys
   # validates :ship_date, presence: true, if: :ship_date_if_ship_checked
 
+  audited
+
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|
       item.cart_id = nil
